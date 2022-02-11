@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import  mongoose  from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
+import postRoutes from "./routes/posts.js"
 
 const app = express()//veritabanı bağlantısı sağlandı
 dotenv.config()//.env içindeki bilgileri process.env içine atıp kullanmamızı sağlar
@@ -20,8 +21,9 @@ app.get("/", (req, res) => {//ilk server dosyasına geldiğinde bir request bir 
         author: "Sümeyye",
         message:"blog sitesi başlangıç videosu",
     });//sonra da cevap olarak bunu gönder
-}
-)
+})
+
+app.use("/posts", postRoutes) // /posts un sonuna gelen her şeyle postRoutes ilgilenecek
 
 const PORT = process.env.PORT || 5000; //serverın çalışacağı portu belirledik 
 
