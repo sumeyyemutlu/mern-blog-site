@@ -11,7 +11,7 @@ import {
     CardContent,
     Typography
 }from "@material-ui/core"
-import noImage from "../images/"
+import noImage from "../images/noImage.jpeg"
 
 const useStyles = makeStyles((theme)=> ({
     root: {
@@ -32,6 +32,14 @@ const useStyles = makeStyles((theme)=> ({
     },
     chip:{
         marginTop: theme.spacing(1)
+    },
+    buttons: {
+        border: "1px solid #3f51b5",
+        justifyContent: "center",
+        padding: "4px 10px",
+        marginLeft: "auto",
+        marginRight: "auto",
+        marginBottom: "4px"
     }
 }))
 const Post = ({_id, title, subtitle, content, tag, image, createdAt}) => {//bunları PostList'ten oluşturduğumuz props ile aldık(useSelector)
@@ -48,6 +56,30 @@ const Post = ({_id, title, subtitle, content, tag, image, createdAt}) => {//bunl
                 {convertRelativeTime(createdAt)}
             </Typography>
         </div>
+        <CardContent>
+            <Typography variant="h6" component ="p" gutterBottom>{ //component="p" ile bir alt satıra geç dedik.
+            //gutterbottom ile alttan boşluk bırakıldı
+            }
+            {title}
+            </Typography>
+            <Typography variant="overline" component ="p" gutterBottom>
+            {subtitle}
+            </Typography>
+            <Typography variant="body2" component ="p" gutterBottom>
+            {content.substring(0, 250) + "..."} {// 0 ile 250 karakter arası gösterilecek geri kalan ... ile
+            }
+            </Typography>
+            <Chip label={` # ${tag}`} variant="outlined" className={classes.chip} />
+        </CardContent>
+        <CardActions>
+            <Button size="small" color="primary" className={classes.buttons}>
+                <Link to={`/posts/${_id}`}>Daha fazla...</Link> {
+                // butona tıklandığında ilgili postun olduğu linke götürecek
+                }
+
+            </Button>
+        </CardActions>
+
     </Card>
   )
 }
