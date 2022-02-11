@@ -11,6 +11,11 @@ const postReducer = (state= initialState, action)=> {
               ...state,//default state'in kopyasını al
               posts: action.payload //ve actionun payloadını ekle
           };
+          case types.CREATE_POST:
+          return {
+              ...state, //default state'in kopyasını al
+              posts: [...state, action.payload ] ,//statteki veri aynı kalsın ve arayyin en sonuna postu ekle
+          };
     
         default:
             return {
