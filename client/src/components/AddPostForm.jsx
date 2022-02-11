@@ -3,6 +3,7 @@ import {useState} from "react";
 import {useDispatch} from "react-redux";
 import FileBase64 from "react-file-base64"; //dosya ekleme kütüphanesi 
 import { makeStyles } from "@material-ui/core/styles";
+import {createPost} from "../actions/post"
 import{
     Button,
     TextField,
@@ -39,13 +40,19 @@ const postSchema = yup.object().shape({//yup ile bir şema oluşturduk.
 
  const AddPostForm = ({open, handleClose}) => { //open ve handleClose appjs teki propslarım.
 
-    const [file, setFile] = useState(null) //dosya ekleme-değiştirme-güncelleme işlemleri
+    const dispatch = useDispatch();
+    const [file, setFile] = useState(null) //dosya ekleme-değiştirme-güncelleme işlemleri için oluşturulan state
 
     const {register, handleSubmit, formState:{errors}, control, reset} = useForm({//useFormdan bunları al dedik.
         resolver: yupResolver(postSchema)//oluşturduğumuz şemayı yup kütüphaneleri ile  hookform'a  entegre ettik.
     });
-    const onSubmit = (data) => {//buradaki data react-hook-formdan gelecek
 
+    const onSubmit = (data) => {//buradaki data react-hook-formdan gelecek
+        dispatch(createPost({...data, image: file}))
+        //gelen datanın bir kopyasını al ve fotoğraf olarak da file'ı al yukarıda tanımladık
+        //bunları createPost(actions) a gönder
+        
+        clearForm();
     }
     const clearForm = () => {//formu temizle fonksiyonu
         reset();//resetlemek için fonksiyon
@@ -127,15 +134,15 @@ const postSchema = yup.object().shape({//yup ile bir şema oluşturduk.
        </div>
        <DialogContent>
            <DialogActions>
-               <Button color="inherit">Vazgeç</Button>
+               <Button color="inherit" onClick={clearForm}>Vazgeç</Button>
                <Button
                 type="submit"
                  variant="outlined"
                  color="primary"
-                 onClick={()=>handleSubmit(onSubmit)()}// tıklandığında handleSubmit içinden onSubmit çalışacak
+                 onClick={()=>handleSubmit(onSubmit) ()} // tıklandığında handleSubmit içinden onSubmit çalışacak
                  // yanındaki boş ()  butonlar formun dışında old. için formu öyle çağırıyoruz.
                   >
-                      Yayınla</Button>
+                    Yayınla</Button>
            </DialogActions>
        </DialogContent>
     </Dialog>
