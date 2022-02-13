@@ -8,8 +8,7 @@ import grid4 from "../images/grid4.png"
 const useStyles = makeStyles((theme) => ({
     layoutShifter: {
         float: "right",
-        margin: theme.spacing(2)
-
+        margin: theme.spacing(2),
     }
 }))
 
@@ -18,7 +17,7 @@ const PostList = () => {
     // state.posts.posts bu web sayfasındaki redux kısmındaki ilk kısım postlarımız
     //altındakin posts ise arraylerimiz onu aldık
     //useSelector mapStateToProps'ın hooklardaki kullanımı
-    //buraya bir state dönderiyoruz
+    //buraya bir state gönderiyoruz.
 
     const [layout, setLayout] = useState("grid3");
 
@@ -31,11 +30,11 @@ const PostList = () => {
         <> 
         {/* layout Shifter*/}
         <div className={classes.layoutShifter}>
-            <Button variant="text" size='small' onClick={()=>setLayout("grid3")}>
-                <img width="30px" height="30px"alt="Three columns grid icon" src={grid3} style={{background: layout==="grid3"? "#c4e2f2": "" }} />
+            <Button variant="text" size='small' onClick={()=>setLayout("grid3")} style={{border: layout==="grid3"? "#b3b3ff 1px solid": "" }}>
+                <img width="30px" height="30px"alt="Three columns grid icon" src={grid3} />
             </Button>
-            <Button variant="text" size='small' onClick={()=>setLayout("grid4")}>
-                <img width="34px" height="34px" alt="Four columns grid icon" src={grid4} style={{background: layout==="grid4"? "#c4e2f2": "" }} />
+            <Button variant="text" size='small' onClick={()=>setLayout("grid4")} style={{border: layout==="grid4"? "#b3b3ff 1px solid": "" }}>
+                <img width="34px" height="34px" alt="Four columns grid icon" src={grid4}  />
             </Button>
         </div>
             <Grid container spacing={2} alignContent ="stretch">
