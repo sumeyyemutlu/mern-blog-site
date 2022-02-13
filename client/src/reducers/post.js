@@ -1,7 +1,8 @@
 import * as types from "../actions/types";
 
-const initialState = {//anlık state bilgisini verdik. burasu defult state
-    posts: []
+const initialState = {//anlık state bilgisini verdik. burası defult state
+    posts: [],
+    currentPost: null,
 }
 
 const postReducer = (state= initialState, action)=> {
@@ -11,6 +12,11 @@ const postReducer = (state= initialState, action)=> {
               ...state,//default state'in kopyasını al
               posts: action.payload //ve actionun payloadını ekle
           };
+          case types.FETCH_SINGLE_POST:
+            return {
+                ...state,//default state'in kopyasını al
+                currentPost: action.payload //ve actionun payloadını ekle
+            };
           case types.CREATE_POST:
           return {
               ...state, //default state'in kopyasını al
