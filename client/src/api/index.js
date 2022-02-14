@@ -1,5 +1,5 @@
 import axios from "axios";
-const apiEndpoint = "http://localhost:5000/posts/" //apinin posts kısmına istek yapıldığında
+const apiEndpoint = "https://blogram-web-site.herokuapp.com/posts/" //apinin posts kısmına istek yapıldığında (deploy edildiği için değişti)
 
 export const fetchPosts = async () => await axios.get(apiEndpoint)
 //controller içindeki getPost ile dönen json verisini burada  fetchPost ile alıyoruz
