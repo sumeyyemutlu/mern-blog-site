@@ -19,8 +19,15 @@ code {
 }
 a {
   text-decoration: none;
-  
+
 }
+#title{
+  color: #f13a13
+}
+#more-button:hover {
+  background-color:#ff4e35 ;
+}
+
 button {
-  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
