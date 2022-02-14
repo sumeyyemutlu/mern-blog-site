@@ -4,6 +4,7 @@ import {useDispatch} from "react-redux";
 import FileBase64 from "react-file-base64"; //dosya ekleme kütüphanesi 
 import { makeStyles } from "@material-ui/core/styles";
 import {createPost} from "../actions/post"
+import alertify  from "alertifyjs";
 import{
     Button,
     TextField,
@@ -19,7 +20,7 @@ import{
 from "@material-ui/core";
 import  {useForm, Controller} from "react-hook-form"//bunları bir kayıt sorgulama işlemi yapmak için kullanıyoruz. formları yönetmek için.
 import * as yup from "yup";
-import {yupResolver} from "@hookform/resolvers/yup"//yup ile react hookform u birleştirmeye yarayan kütüphane
+import {yupResolver} from "@hookform/resolvers/yup"//yup ile react hookform u birleştirmeye yarayan kütüphane.
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 const tags = ["fun","programming","science","health"];
 
-const postSchema = yup.object().shape({//yup ile bir şema oluşturduk.
+const postSchema = yup.object().shape({//yup ile bir şema oluşturduk. İlgili form alanlarının kontrolunu sağlamak için 
     title: yup.string().required("Başlık bilgisi zorunludur."),//required: doldurulması zorunlu alanlar için kullanılır.
     subtitle: yup.string().required(),
     content: yup.string().min(20).required(),//içerik kısmı min 20 stribgten oluşacak.
@@ -40,7 +41,7 @@ const postSchema = yup.object().shape({//yup ile bir şema oluşturduk.
 
  const AddPostForm = ({open, handleClose}) => { //open ve handleClose appjs teki propslarım.
 
-    const dispatch = useDispatch();
+    const dispatch = useDispatch(); //actionları bağlamamıza yarar. 
     const [file, setFile] = useState(null) //dosya ekleme-değiştirme-güncelleme işlemleri için oluşturulan state
 
     const {register, handleSubmit, formState:{errors}, control, reset} = useForm({//useFormdan bunları al dedik.
@@ -48,9 +49,10 @@ const postSchema = yup.object().shape({//yup ile bir şema oluşturduk.
     });
 
     const onSubmit = (data) => {//buradaki data react-hook-formdan gelecek
-        dispatch(createPost({...data, image: file}))
+        dispatch(createPost({...data, image: file}))//createPost actionuna git ve gelen datanın kopyası ile imagei gönder.
         //gelen datanın bir kopyasını al ve fotoğraf olarak da file'ı al yukarıda tanımladık
         //bunları createPost(actions) a gönder
+        alertify.success(data.title +" makalesi eklendi!",4)
         
         clearForm();
     }

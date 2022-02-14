@@ -17,12 +17,14 @@ const useStyles = makeStyles((theme)=> ({
     root: {
         maxWidth: 374,
         position: "relative",
+        
     },
     media: {
         height: 0,
         paddingTop: "56.25%",
         backgorundColor: "rgba(0, 0, 0, 0.5)",
         backgorundColorBlendMode: "darken",
+        
     },
     overlay: {
         position: "absolute",
@@ -34,13 +36,19 @@ const useStyles = makeStyles((theme)=> ({
         marginTop: theme.spacing(1)
     },
     buttons: {
-        border: "1px solid #3f51b5",
         justifyContent: "center",
-        padding: "4px 10px",
+        padding: "4px 14px",
         marginLeft: "auto",
         marginRight: "auto",
-        marginBottom: "4px"
+        marginBottom: "4px",
+        border: "1px solid #ff7a66",
+        backgroundColor: "#ff7a66",
+        borderRadius: "20px"
+    },
+    link: {
+        color: "white"
     }
+    
 }))
 const Post = ({_id, title, subtitle, content, tag, image, createdAt}) => {//bunları PostList'ten oluşturduğumuz props ile aldık(useSelector)
     const convertRelativeTime = (date) => {//buradan bize bir date gelecek
@@ -51,7 +59,7 @@ const Post = ({_id, title, subtitle, content, tag, image, createdAt}) => {//bunl
     <Card className= {classes.root}>
         <CardMedia className={classes.media} image={image || noImage} title ="Resim"/>
         <div className={classes.overlay}>
-            <Typography variant="h6">Sümeyye</Typography>
+            <Typography variant="h6">Sümeyye Mutlu</Typography>
             <Typography variant="body2">
                 {convertRelativeTime(createdAt)}
             </Typography>
@@ -69,11 +77,11 @@ const Post = ({_id, title, subtitle, content, tag, image, createdAt}) => {//bunl
             {content.substring(0, 250) + "..."} {// 0 ile 250 karakter arası gösterilecek geri kalan ... ile
             }
             </Typography>
-            <Chip label={` # ${tag}`} variant="outlined" className={classes.chip} />
+            <Chip label={` #${tag}`} variant="outlined" className={classes.chip} />
         </CardContent>
         <CardActions>
-            <Button size="small" color="primary" className={classes.buttons}>
-                <Link to={`/posts/${_id}`}>Daha fazla...</Link> {
+            <Button size="small" className={classes.buttons} id="more-button">
+                <Link id="more-link"className={classes.link} to={`/posts/${_id}` }>Daha fazla...</Link> {
                 // butona tıklandığında ilgili postun olduğu linke götürecek
                 }
 
