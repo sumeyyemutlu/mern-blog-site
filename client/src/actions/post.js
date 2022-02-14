@@ -39,3 +39,26 @@ export const createPost = (post) => async (dispatch) => {//iki parametre aldı.
     }
    
 }
+export const deletePost = (id) => async (dispatch) => {//iki parametre aldı.
+    try {
+        const {data} = await api.deletePost(id);//servera axios ile deletePost(id) gönderecesğiz ve server da bunu kaldıracak.
+        dispatch({
+            type: types.DELETE_POST,
+            payload: data._id, //silinenpostun idsini gönder döndür dedik.
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const updatePost = (id, post) => async (dispatch) => {//iki parametre aldı. biri güncellenen postun idsi diğeri de post içeriği
+    try {
+        const {data} = await api.updatePost(id, post);
+        dispatch({
+            type: types.UPDATE_POST,
+            payload: data,
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+   
